@@ -34,6 +34,9 @@ class Colaborativo
 
   # método que calcula a média dos erros
   def rootMeanSquareError()
+
+    #rmse = 1/n * (somatorio i=1 n) (valorReal - valorPrevisto)²
+
   end
 
   # método que calcula o produto entre dois vetores
@@ -53,5 +56,33 @@ class Colaborativo
     end
     somatorio = Math.sqrt(somatorio)
     return somatorio
+  end
+
+  # calcular previsão dos ratings
+  def calcularPrevisao(usuarios, vizinhos)
+    previsao = []
+    for i in 0...usuarios.length
+      previsao[i] = []
+      for j in 0...usuarios[i].length
+        if usuarios[i][j] > 0
+          previsao[i][j] = calcularMediaRating(vizinhos[i])
+        end
+      end
+    end
+    return previsao
+  end
+
+  # calcular média dos ratings dos vizinhos
+  def calcularMediaRating(vizinhos)
+    somatorio = 0.0
+    contador = 0
+    for i in 0...vizinhos.length
+      if vizinhos[i][1] > 0
+        somatorio += vizinhos[i][1]
+        contador += 1
+      end
+    end
+    media = somatorio / contador
+    return media
   end
 end

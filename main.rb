@@ -20,9 +20,11 @@ class Main
   end
 
   vizinhos = colab.similaridadeCossenos(usuarios)
+  previsao = colab.calcularPrevisao(usuarios, vizinhos)
 
   while wait = gets
     p usuarios[wait.to_i]
     p vizinhos[wait.to_i]
+    p previsao[wait.to_i]
   end
 end
