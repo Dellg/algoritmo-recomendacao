@@ -78,6 +78,7 @@ class Colaborativo
     contador = 0
     for i in 0...vizinhos.length
       if vizinhos[i][1] > 0
+        # AQUI TÁ ERRADO, tá calculando as medidas e não os ratings, corrigir depois
         somatorio += vizinhos[i][1]
         contador += 1
       end
