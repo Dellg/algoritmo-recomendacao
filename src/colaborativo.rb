@@ -13,18 +13,25 @@ class Colaborativo
           produto = produtoVetor(usuarios[i], usuarios[j])
           normaA = normaVetor(usuarios[i])
           normaB = normaVetor(usuarios[j])
-          medidaCosseno = produto / normaA * normaB
-          # se a medida for maior ou igual a 90%, guardará o ID do vizinho similar e a medida da similaridade
-          if medidaCosseno >= 0.9
+          medidaCosseno = produto / (normaA * normaB)
+
+          # se tem menos de 10 vizinhos adiciona direto, caso contrário, substitui o último se a medida for maior
+          if vizinhos[i].length < 10
             valores = [j, medidaCosseno]
             vizinhos[i].push(valores)
+          else
+            vizinhos[i] = vizinhos[i].sort_by { |v| v[1] }
+            if medidaCosseno > vizinhos[i][0][1]
+              valores = [j, medidaCosseno]
+              vizinhos[i][0] = valores
+            end
           end
         end
       end
     end
     return vizinhos
   end
-  
+
   # método que calcula a média dos erros
   def rootMeanSquareError()
   end

@@ -23,5 +23,6 @@ class Main
 
   while wait = gets
     p usuarios[wait.to_i]
+    p vizinhos[wait.to_i]
   end
 end
