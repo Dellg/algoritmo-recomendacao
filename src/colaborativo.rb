@@ -6,9 +6,9 @@ class Colaborativo
   # método que calcula a similaridade usando a medida dos cossenos
   def similaridadeCossenos(usuarios)
     vizinhos = []
-    for i in 0...usuarios.length
+    for i in 1..usuarios.length
       vizinhos[i] = []
-      for j in 0...usuarios.length
+      for j in 1..usuarios.length
         if i != j
           produto = produtoVetor(usuarios[i], usuarios[j])
           normaA = normaVetor(usuarios[i])
@@ -34,9 +34,7 @@ class Colaborativo
 
   # método que calcula a média dos erros
   def rootMeanSquareError()
-
     #rmse = 1/n * (somatorio i=1 n) (valorReal - valorPrevisto)²
-
   end
 
   # método que calcula o produto entre dois vetores
@@ -61,11 +59,11 @@ class Colaborativo
   # calcular previsão dos ratings
   def calcularPrevisao(usuarios, vizinhos)
     previsao = []
-    for i in 0...usuarios.length
+    for i in 1..usuarios.length
       previsao[i] = []
-      for j in 0...usuarios[i].length
+      for j in 1..usuarios[i].length
         if usuarios[i][j] > 0
-          previsao[i][j] = calcularMediaRating(vizinhos[i])
+          previsao[i][j] = calcularMediaRating(vizinhos[i], j)
         end
       end
     end
@@ -73,13 +71,13 @@ class Colaborativo
   end
 
   # calcular média dos ratings dos vizinhos
-  def calcularMediaRating(vizinhos)
+  def calcularMediaRating(vizinhos, idFilme)
     somatorio = 0.0
     contador = 0
     for i in 0...vizinhos.length
-      if vizinhos[i][1] > 0
-        # AQUI TÁ ERRADO, tá calculando as medidas e não os ratings, corrigir depois
-        somatorio += vizinhos[i][1]
+      nota = usuarios[vizinhos[i][0]][idFilme]
+      if nota > 0
+        somatorio += nota
         contador += 1
       end
     end
