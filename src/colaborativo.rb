@@ -63,7 +63,7 @@ class Colaborativo
       previsao[i] = []
       for j in 1...usuarios[i].length
         if usuarios[i][j] > 0
-          previsao[i][j] = calcularMediaRating(vizinhos[i], j)
+          previsao[i][j] = calcularMediaRating(usuarios, vizinhos[i], j)
         end
       end
     end
@@ -71,7 +71,7 @@ class Colaborativo
   end
 
   # calcular média dos ratings dos vizinhos
-  def calcularMediaRating(vizinhos, idFilme)
+  def calcularMediaRating(usuarios, vizinhos, idFilme)
     somatorio = 0.0
     contador = 0
     for i in 0...vizinhos.length
