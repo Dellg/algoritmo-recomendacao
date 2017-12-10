@@ -6,9 +6,9 @@ class Colaborativo
   # método que calcula a similaridade usando a medida dos cossenos
   def similaridadeCossenos(usuarios)
     vizinhos = []
-    for i in 1..usuarios.length
+    for i in 1...usuarios.length
       vizinhos[i] = []
-      for j in 1..usuarios.length
+      for j in 1...usuarios.length
         if i != j
           produto = produtoVetor(usuarios[i], usuarios[j])
           normaA = normaVetor(usuarios[i])
@@ -40,7 +40,7 @@ class Colaborativo
   # método que calcula o produto entre dois vetores
   def produtoVetor(vetorA, vetorB)
     somatorio = 0.0
-    for i in 0...vetorA.length
+    for i in 1...vetorA.length
       somatorio += vetorA[i] * vetorB[i]
     end
     return somatorio
@@ -49,7 +49,7 @@ class Colaborativo
   # método que calcula a norma de um vetor
   def normaVetor(vetor)
     somatorio = 0.0
-    for i in 0...vetor.length
+    for i in 1...vetor.length
       somatorio += vetor[i] ** 2
     end
     somatorio = Math.sqrt(somatorio)
@@ -59,9 +59,9 @@ class Colaborativo
   # calcular previsão dos ratings
   def calcularPrevisao(usuarios, vizinhos)
     previsao = []
-    for i in 1..usuarios.length
+    for i in 1...usuarios.length
       previsao[i] = []
-      for j in 1..usuarios[i].length
+      for j in 1...usuarios[i].length
         if usuarios[i][j] > 0
           previsao[i][j] = calcularMediaRating(vizinhos[i], j)
         end
