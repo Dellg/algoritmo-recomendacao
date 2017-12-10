@@ -13,7 +13,7 @@ class Main
     end
   end
 
-  # lendo dados do arquivo u1.base e associando o rating de cada filme a cada usuário
+  # lendo dados do arquivo base e associando o rating de cada filme a cada usuário
   puts "Lendo arquivo dos ratings e associando a cada usuário..."
   arquivo = File.open("./dados/u1.base", "r")
   arquivo.each_line do |linha|
@@ -27,10 +27,17 @@ class Main
   puts "Calculando os ratings previstos para cada usuário com base nos ratings dos vizinhos..."
   previsao = colab.calcularPrevisao(usuarios, vizinhos)
 
-  puts "Digite um índice para ver as informações sobre um usuário:"
-  while wait = gets
-    p usuarios[wait.to_i]
-    p vizinhos[wait.to_i]
-    p previsao[wait.to_i]
+  # lendo dados do arquivo de teste para ser possível comparar com os dados base
+  puts "Lendo arquivo dos ratings de teste para comparar..."
+  dados = []
+  arquivo = File.open("./dados/u1.test", "r")
+  arquivo.each_line do |linha|
+    linha = linha.split("\t")
+    dados[linha[0].to_i][linha[1].to_i] = linha[2].to_i
   end
+
+  # comparando dados base com teste
+  puts "Comparando dados base com dados teste..."
+  rmse = colab.rootMeanSquareError(previsao, dados)
+  puts "Root Mean Square Error = #{rmse}"
 end
