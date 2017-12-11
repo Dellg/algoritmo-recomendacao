@@ -9,7 +9,7 @@ class Main
   dados = []
   for i in 1..943
     usuarios[i] = []
-    dados[i] = []
+    dados[i] = {}
     for j in 1..1682
       usuarios[i][j] = 0
     end
