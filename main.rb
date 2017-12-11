@@ -6,8 +6,10 @@ class Main
   # inicialização dos usuários e filmes com rating inicial = 0
   puts "Criando usuários..."
   usuarios = []
+  dados = []
   for i in 1..943
     usuarios[i] = []
+    dados[i] = []
     for j in 1..1682
       usuarios[i][j] = 0
     end
@@ -29,9 +31,8 @@ class Main
 
   # lendo dados do arquivo de teste para ser possível comparar com os dados base
   puts "Lendo arquivo dos ratings de teste para comparar..."
-  dados = []
-  arquivo = File.open("./dados/u1.test", "r")
-  arquivo.each_line do |linha|
+  arquivo2 = File.open("./dados/u1.test", "r")
+  arquivo2.each_line do |linha|
     linha = linha.split("\t")
     dados[linha[0].to_i][linha[1].to_i] = linha[2].to_i
   end
