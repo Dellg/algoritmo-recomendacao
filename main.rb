@@ -43,7 +43,7 @@ class Main
     # comparando dados base com teste
     puts "Comparando dados base com dados teste..."
     rmse = colab.rootMeanSquareError(previsao, dados)
-    puts "Root Mean Square Error = #{rmse}\nFinalizando Iteração #{iteracao}\n\n"
+    puts "Root Mean Square Error = #{rmse}\n\tFinalizando Iteração #{iteracao}\n\n"
   end
   puts "Digite algo para finalizar..."
   gets

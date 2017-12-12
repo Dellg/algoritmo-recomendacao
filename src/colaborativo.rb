@@ -36,7 +36,7 @@ class Colaborativo
   def rootMeanSquareError(previsao, dados)
     #rmse = 1/n * (somatorio i=1 n) (valorReal - valorPrevisto)²
     somatorio = 0.0
-    for i in 0...dados.length
+    for i in 1...dados.length
       if dados[i] != nil
         dados[i].each do |chave, valor|
           if previsao[i][chave] != nil
