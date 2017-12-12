@@ -40,12 +40,14 @@ class Colaborativo
       if dados[i] != nil
         dados[i].each do |chave, valor|
           if previsao[i][chave] != nil
-            somatorio += (valor - previsao[i][chave]) ** 2
+            if !previsao[i][chave].nan?
+              somatorio += (valor - previsao[i][chave]) ** 2
+            end
           end
         end
       end
     end
-    rmse = (1/previsao.length) * somatorio
+    rmse = (1.0/previsao.length) * somatorio
     return rmse
   end
 
