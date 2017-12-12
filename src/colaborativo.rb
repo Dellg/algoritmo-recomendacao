@@ -39,7 +39,9 @@ class Colaborativo
     for i in 0...dados.length
       if dados[i] != nil
         dados[i].each do |chave, valor|
-          somatorio += (valor - previsao[chave - 1]) ** 2
+          if previsao[i][chave] != nil
+            somatorio += (valor - previsao[i][chave]) ** 2
+          end
         end
       end
     end
