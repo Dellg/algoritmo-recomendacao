@@ -3,7 +3,10 @@ require_relative './src/colaborativo'
 class Main
   colab = Colaborativo.new
 
-  for iteracao in 1..5
+  txtGerado = File.new("rmse.txt", "w+")
+  txtGerado.puts("particao\talgoritmo\trmse")
+
+  for iteracao in 1..1
     # criando a matriz de usuários e filmes e inicializando todos os ratings com 0
     puts "Criando usuários e inicializando ratings com 0..."
     usuarios = []
@@ -50,5 +53,8 @@ class Main
     puts "Comparando dados base com dados teste..."
     rmse = colab.rootMeanSquareError(previsao, dados)
     puts "Root Mean Square Error = #{rmse}\n\n"
+
+    txtGerado.puts("#{iteracao}\tcolaborativo\t#{rmse}")
   end
+  txtGerado.close
 end
