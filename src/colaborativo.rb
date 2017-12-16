@@ -36,16 +36,18 @@ class Colaborativo
   # método que calcula a média dos erros
   def rootMeanSquareError(previsao, dados)
     somatorio = 0.0
+    contador = 0
     for i in 1...dados.length
       if dados[i] != nil
         for j in 1...dados[i].length
           if dados[i][j] != nil and previsao[i][j] != nil
             somatorio += (dados[i][j] - previsao[i][j]) ** 2
+            contador += 1
           end
         end
       end
     end
-    rmse = (1.0/previsao.length) * somatorio
+    rmse = (1.0/contador) * somatorio
     return rmse
   end
 
