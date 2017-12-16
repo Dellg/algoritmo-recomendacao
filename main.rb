@@ -6,7 +6,7 @@ class Main
   txtGerado = File.new("rmse.txt", "w+")
   txtGerado.puts("particao\talgoritmo\trmse")
 
-  for iteracao in 1..1
+  for iteracao in 1..5
     # criando a matriz de usuários e filmes e inicializando todos os ratings com 0
     puts "Criando usuários e inicializando ratings com 0..."
     usuarios = []
