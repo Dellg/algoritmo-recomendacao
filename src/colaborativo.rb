@@ -13,17 +13,18 @@ class Colaborativo
           produto = produtoVetor(usuarios[i], usuarios[j])
           normaA = normaVetor(usuarios[i])
           normaB = normaVetor(usuarios[j])
-          medidaCosseno = produto / (normaA * normaB)
-
-          # se tem menos de 10 vizinhos adiciona direto, caso contrário, substitui o último se a medida for maior
-          if vizinhos[i].length < 10
-            valores = [j, medidaCosseno]
-            vizinhos[i].push(valores)
-          else
-            vizinhos[i] = vizinhos[i].sort_by { |v| v[1] }
-            if medidaCosseno > vizinhos[i][0][1]
+          if normaA > 0 and normaB > 0
+            medidaCosseno = produto / (normaA * normaB)
+            # se tem menos de 10 vizinhos adiciona direto, caso contrário, substitui o último se a medida for maior
+            if vizinhos[i].length < 10
               valores = [j, medidaCosseno]
-              vizinhos[i][0] = valores
+              vizinhos[i].push(valores)
+            else
+              vizinhos[i] = vizinhos[i].sort_by { |v| v[1] }
+              if medidaCosseno > vizinhos[i][0][1]
+                valores = [j, medidaCosseno]
+                vizinhos[i][0] = valores
+              end
             end
           end
         end
@@ -34,15 +35,12 @@ class Colaborativo
 
   # método que calcula a média dos erros
   def rootMeanSquareError(previsao, dados)
-    #rmse = 1/n * (somatorio i=1 n) (valorReal - valorPrevisto)²
     somatorio = 0.0
     for i in 1...dados.length
       if dados[i] != nil
-        dados[i].each do |chave, valor|
-          if previsao[i][chave] != nil
-            if !previsao[i][chave].nan?
-              somatorio += (valor - previsao[i][chave]) ** 2
-            end
+        for j in 1...dados[i].length
+          if dados[i][j] != nil and previsao[i][j] != nil
+            somatorio += (dados[i][j] - previsao[i][j]) ** 2
           end
         end
       end
@@ -76,7 +74,7 @@ class Colaborativo
     for i in 1...usuarios.length
       previsao[i] = []
       for j in 1...usuarios[i].length
-        if usuarios[i][j] > 0
+        if usuarios[i][j] == 0
           previsao[i][j] = calcularMediaRating(usuarios, vizinhos[i], j)
         end
       end
@@ -95,7 +93,11 @@ class Colaborativo
         contador += 1
       end
     end
-    media = somatorio / contador
-    return media
+    if contador == 0
+      return 0
+    else
+      media = somatorio / contador
+      return media
+    end
   end
 end
