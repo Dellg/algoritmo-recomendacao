@@ -48,6 +48,7 @@ class Colaborativo
       end
     end
     rmse = (1.0/contador) * somatorio
+    rmse = Math.sqrt(rmse)
     return rmse
   end
 
